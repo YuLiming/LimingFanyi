@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:background="#F5F5F5"
+    android:layout_height="52dp"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/src"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="4dp"
+        android:gravity="left"
+        android:textSize="17dp"
+        android:textColor="#111"
+        android:text="apple"/>
+    <TextView
+        android:id="@+id/yi"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginBottom="4dp"
+        android:gravity="left"
+        android:textSize="13dp"
+        android:textColor="#999"
+        android:text="苹果"/>
+</LinearLayout>
