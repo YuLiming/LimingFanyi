@@ -3,9 +3,12 @@ package android.particles.com.retrofit.component.util;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.database.sqlite.SQLiteDatabase;
 import android.particles.com.retrofit.common.APIValue;
 import android.particles.com.retrofit.common.ApiStores;
 import android.particles.com.retrofit.common.AppClient;
+import android.particles.com.retrofit.common.MyApplication;
 import android.particles.com.retrofit.modules.main.adapter.HomeAdapter;
 import android.particles.com.retrofit.modules.main.domain.MyError;
 import android.particles.com.retrofit.modules.main.domain.TransResult;
@@ -39,12 +42,11 @@ public class GetJson
     private RecyclerView mRecyclerView;
     private List<String> fanyi;
     private List<String> src;
-    private Context context;
     protected HomeAdapter madapter;
+    private SQLiteDatabase db;
 
-    public GetJson(Context mcontext,List<String> from,List<String> datas,HomeAdapter adapter,RecyclerView recyclerView)
+    public GetJson(List<String> from,List<String> datas,HomeAdapter adapter,RecyclerView recyclerView)
     {
-        context = mcontext;
         fanyi = datas;
         madapter = adapter;
         mRecyclerView = recyclerView;
@@ -60,15 +62,22 @@ public class GetJson
         call.enqueue(new Callback<Word>() {
             @Override
             public void onResponse(Response<Word> response) {
-
                 List<TransResult> results = response.body().getTransResult();
                 String yi = results.get(0).getDst();
                 String srcs = results.get(0).getSrc();
+                //数据持久化
+                db = MyApplication.getDb();
+                ContentValues values = new ContentValues();
+                values.put("src", srcs);
+                values.put("yiwen", yi);
+                db.insert("fanyi", null, values);
+                values.clear();
+                //end
                 fanyi.add(yi);
                 src.add(srcs);
                 Collections.reverse(src);
                 Collections.reverse(fanyi);
-                mRecyclerView.setAdapter(madapter = new HomeAdapter(context,src,fanyi));
+                mRecyclerView.setAdapter(madapter = new HomeAdapter(MyApplication.getContext(),src,fanyi));
             }
             @Override
             public void onFailure(Throwable t) {

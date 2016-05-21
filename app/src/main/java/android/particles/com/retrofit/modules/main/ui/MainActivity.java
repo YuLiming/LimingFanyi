@@ -1,19 +1,28 @@
 package android.particles.com.retrofit.modules.main.ui;
 
 import android.app.AlertDialog;
+import android.content.ContentValues;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.particles.com.retrofit.*;
 import android.particles.com.retrofit.base.BaseActivity;
+import android.particles.com.retrofit.common.MyApplication;
 import android.particles.com.retrofit.component.util.DividerItemDecoration;
 import android.particles.com.retrofit.component.util.GetJson;
 import android.os.Bundle;
+import android.particles.com.retrofit.component.util.MyDatabaseHelper;
 import android.particles.com.retrofit.component.util.ToType;
+import android.particles.com.retrofit.modules.main.adapter.HomeAdapter;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
+import java.util.Collections;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 /*待完成功能：
@@ -38,16 +47,34 @@ public class MainActivity extends BaseActivity {
         button = (Button)findViewById(R.id.button);
         editText = (EditText)findViewById(R.id.editText);
 
-        mRecyclerView = (RecyclerView)findViewById(R.id.recycleview);
+        dbHelper = new MyDatabaseHelper(this,"Fanyi.db",null,1);
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        Cursor cursor = db.query("fanyi",null,null,null,null,null,null);
+        if (cursor.moveToFirst())
+        {
+            do{
+                String src = cursor.getString(cursor.getColumnIndex("src"));
+                String yi = cursor.getString(cursor.getColumnIndex("yiwen"));
+                datasrc.add(src);
+                data.add(yi);
+            }while(cursor.moveToNext());
+        }
+        cursor.close();
 
+
+
+        mRecyclerView = (RecyclerView)findViewById(R.id.recycleview);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mRecyclerView.addItemDecoration(new DividerItemDecoration(this,
                 DividerItemDecoration.VERTICAL_LIST));
+        Collections.reverse(datasrc);
+        Collections.reverse(data);
+        mRecyclerView.setAdapter(madapter = new HomeAdapter(MainActivity.this, datasrc, data));
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String word = editText.getText().toString();
-                getJson = new GetJson(MainActivity.this, datasrc,data, madapter, mRecyclerView);
+                getJson = new GetJson(datasrc,data, madapter, mRecyclerView);
                 if (ToType.isLetter(word)) {
                     getJson.getWord(word, "zh");
                 } else {
