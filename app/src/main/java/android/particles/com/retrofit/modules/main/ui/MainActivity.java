@@ -28,7 +28,7 @@ import java.util.ArrayList;
 /*待完成功能：
 * 连接API失败的异常处理（自定义异常）
 * UI优化
-* 本地缓存
+* 本地缓存（完成）
 * recyclerView展示缓存
 *剪切板管理器获取复制内容
 *消息通知栏展示翻译结果
