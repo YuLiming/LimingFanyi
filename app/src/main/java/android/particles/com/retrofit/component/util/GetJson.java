@@ -17,6 +17,7 @@ import android.particles.com.retrofit.modules.main.ui.MainActivity;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 import java.io.UnsupportedEncodingException;
@@ -82,8 +83,7 @@ public class GetJson
             @Override
             public void onFailure(Throwable t) {
                 t.printStackTrace();
-                Log.d("ylm","failed"
-                );
+                Toast.makeText(MyApplication.getContext(),"网络连接失败",Toast.LENGTH_SHORT).show();
             }
         });
     }

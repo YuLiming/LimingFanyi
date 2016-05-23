@@ -26,10 +26,10 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 /*待完成功能：
-* 连接API失败的异常处理（自定义异常）
-* UI优化
+* 连接API失败的异常处理
+* UI优化(完成)
 * 本地缓存（完成）
-* recyclerView展示缓存
+* recyclerView展示缓存（完成）
 *剪切板管理器获取复制内容
 *消息通知栏展示翻译结果
 * */
@@ -37,6 +37,7 @@ public class MainActivity extends BaseActivity {
     private RecyclerView mRecyclerView;
     private Button button;
     private EditText editText;
+    private int flag;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,21 +48,7 @@ public class MainActivity extends BaseActivity {
         button = (Button)findViewById(R.id.button);
         editText = (EditText)findViewById(R.id.editText);
 
-        dbHelper = new MyDatabaseHelper(this,"Fanyi.db",null,1);
-        SQLiteDatabase db = dbHelper.getWritableDatabase();
-        Cursor cursor = db.query("fanyi",null,null,null,null,null,null);
-        if (cursor.moveToFirst())
-        {
-            do{
-                String src = cursor.getString(cursor.getColumnIndex("src"));
-                String yi = cursor.getString(cursor.getColumnIndex("yiwen"));
-                datasrc.add(src);
-                data.add(yi);
-            }while(cursor.moveToNext());
-        }
-        cursor.close();
-
-
+        initData();
 
         mRecyclerView = (RecyclerView)findViewById(R.id.recycleview);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -83,5 +70,25 @@ public class MainActivity extends BaseActivity {
             }
         });
 
+    }
+    private void initData()
+    {
+        flag = 0;
+        dbHelper = new MyDatabaseHelper(this,"Fanyi.db",null,1);
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        Cursor cursor = db.query("fanyi",null,null,null,null,null,null);
+        if (cursor.moveToFirst())
+        {
+            do{
+                flag++;
+                String src = cursor.getString(cursor.getColumnIndex("src"));
+                String yi = cursor.getString(cursor.getColumnIndex("yiwen"));
+                datasrc.add(src);
+                data.add(yi);
+                if (flag>=10)
+                {break;}
+            }while(cursor.moveToNext());
+        }
+        cursor.close();
     }
 }
