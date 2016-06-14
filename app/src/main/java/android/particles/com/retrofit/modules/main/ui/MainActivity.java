@@ -27,11 +27,9 @@ import android.widget.Toast;
 import java.util.ArrayList;
 /*待完成功能：
 * 连接API失败的异常处理
-* UI优化(完成)
-* 本地缓存（完成）
-* recyclerView展示缓存（完成）
-*剪切板管理器获取复制内容
-*消息通知栏展示翻译结果
+*获取剪切板管理器获取复制内容(完成)
+*在消息通知栏展示翻译结果
+*翻译结果自动更新机制
 * */
 public class MainActivity extends BaseActivity {
     private RecyclerView mRecyclerView;
