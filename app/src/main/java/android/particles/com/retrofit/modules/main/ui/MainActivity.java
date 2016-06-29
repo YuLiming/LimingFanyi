@@ -2,11 +2,13 @@ package android.particles.com.retrofit.modules.main.ui;
 
 import android.app.AlertDialog;
 import android.content.ContentValues;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.particles.com.retrofit.*;
 import android.particles.com.retrofit.base.BaseActivity;
 import android.particles.com.retrofit.common.MyApplication;
+import android.particles.com.retrofit.common.MyService;
 import android.particles.com.retrofit.component.util.DividerItemDecoration;
 import android.particles.com.retrofit.component.util.GetJson;
 import android.os.Bundle;
@@ -27,9 +29,8 @@ import android.widget.Toast;
 import java.util.ArrayList;
 /*待完成功能：
 * 连接API失败的异常处理
-*获取剪切板管理器获取复制内容(完成)
-*在消息通知栏展示翻译结果
-*翻译结果自动更新机制
+* 存储失败，存储顺序问题
+*已可以获取更新结果，但未能实时更新通知栏
 * */
 public class MainActivity extends BaseActivity {
     private RecyclerView mRecyclerView;
@@ -40,6 +41,9 @@ public class MainActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.index);
+
+        Intent startIntent = new Intent(this,MyService.class);
+        startService(startIntent);
 
         data = new ArrayList<String>();
         datasrc = new ArrayList<String>();
@@ -59,7 +63,7 @@ public class MainActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 String word = editText.getText().toString();
-                getJson = new GetJson(datasrc,data, madapter, mRecyclerView);
+                getJson = new GetJson(datasrc, data, madapter, mRecyclerView);
                 if (ToType.isLetter(word)) {
                     getJson.getWord(word, "zh");
                 } else {
@@ -67,6 +71,7 @@ public class MainActivity extends BaseActivity {
                 }
             }
         });
+
 
     }
     private void initData()
