@@ -9,6 +9,8 @@ import android.os.Binder;
 import android.os.IBinder;
 import android.particles.com.retrofit.R;
 import android.particles.com.retrofit.component.util.GetCopyResult;
+import android.particles.com.retrofit.component.util.GetJson;
+import android.particles.com.retrofit.component.util.ToType;
 import android.particles.com.retrofit.modules.main.ui.MainActivity;
 import android.util.Log;
 
@@ -19,6 +21,8 @@ public class MyService extends Service
 {
     private String src;
     private MyBlinder myBlinder = new MyBlinder();
+    private Notification.Builder builder;
+    private Notification note;
     class MyBlinder extends Binder
     {
         public void getsomething()
@@ -36,11 +40,11 @@ public class MyService extends Service
     public void onCreate()
     {
         super.onCreate();
-        Notification.Builder builder = new Notification.Builder(this).setTicker("显示于屏幕顶端状态栏的文本")
+        builder = new Notification.Builder(this).setTicker("显示于屏幕顶端状态栏的文本")
                 .setSmallIcon(R.drawable.ic_launcher);
         Intent intent = new Intent(this,MainActivity.class);
         PendingIntent pi = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-        Notification note = builder.setContentIntent(pi).setContentTitle("原文："+src).setContentText("译文：").build();
+        note = builder.setContentIntent(pi).setContentTitle("原文：暂无").setContentText("译文：暂无").build();
         startForeground(1,note);
         Log.d("ylm", "create");
 
@@ -55,10 +59,14 @@ public class MyService extends Service
             public void onPrimaryClipChanged() {
                 GetCopyResult getCopyResult = new GetCopyResult();
                 src = getCopyResult.getResult();
-                Log.d("ylm","更新："+src);
+                GetJson getJson = new GetJson();
+                if (ToType.isLetter(src)) {
+                    getJson.showResultInNotication(src, "zh");
+                } else {
+                    getJson.showResultInNotication(src, "en");
+                }
             }
         });
-        Log.d("ylm","start");
         return  super.onStartCommand(intent,flags,startId);
     }
 
