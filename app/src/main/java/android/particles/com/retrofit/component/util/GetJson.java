@@ -87,16 +87,18 @@ public class GetJson
                 db.insert("fanyi", null, values);
                 values.clear();
                 //end
-                fanyi.add(yi);
-                src.add(srcs);
                 Collections.reverse(src);
                 Collections.reverse(fanyi);
-                mRecyclerView.setAdapter(madapter = new HomeAdapter(MyApplication.getContext(),src,fanyi));
+                fanyi.add(yi);
+                src.add(srcs);
+                ShowInScreen showInScreen = new ShowInScreen(src,fanyi,madapter,mRecyclerView);
+                showInScreen.showInFan();
             }
             @Override
             public void onFailure(Throwable t) {
                 t.printStackTrace();
-                Toast.makeText(MyApplication.getContext(),"网络连接失败",Toast.LENGTH_SHORT).show();
+                Log.d("getjson","获取数据失败");
+                Toast.makeText(MyApplication.getContext(),"请检查网络连接",Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -112,7 +114,6 @@ public class GetJson
                 List<TransResult> results = response.body().getTransResult();
                 String srcs = results.get(0).getSrc();
                 String yi = results.get(0).getDst();
-                Log.d("fanhui",yi);
                 NotificationManager manager = (NotificationManager)context.getSystemService(Context.NOTIFICATION_SERVICE);
                 Notification.Builder builder = new Notification.Builder(context).setTicker("显示于屏幕顶端状态栏的文本")
                         .setSmallIcon(R.drawable.ic_launcher);
@@ -123,7 +124,7 @@ public class GetJson
             @Override
             public void onFailure(Throwable t) {
                 t.printStackTrace();
-                Toast.makeText(MyApplication.getContext(),"通知显示失败",Toast.LENGTH_SHORT).show();
+                Log.d("getjson", "通知栏更新失败");
             }
         });
     }

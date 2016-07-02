@@ -46,7 +46,6 @@ public class MyService extends Service
         PendingIntent pi = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
         note = builder.setContentIntent(pi).setContentTitle("原文：暂无").setContentText("译文：暂无").build();
         startForeground(1,note);
-        Log.d("ylm", "create");
 
     }
 

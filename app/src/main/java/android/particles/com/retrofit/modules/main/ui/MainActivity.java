@@ -13,6 +13,7 @@ import android.particles.com.retrofit.component.util.DividerItemDecoration;
 import android.particles.com.retrofit.component.util.GetJson;
 import android.os.Bundle;
 import android.particles.com.retrofit.component.util.MyDatabaseHelper;
+import android.particles.com.retrofit.component.util.ShowInScreen;
 import android.particles.com.retrofit.component.util.ToType;
 import android.particles.com.retrofit.modules.main.adapter.HomeAdapter;
 import android.support.v7.widget.LinearLayoutManager;
@@ -28,9 +29,8 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 /*待完成功能：
-* 连接API失败的异常处理
-* 存储失败，存储顺序问题
-*已可以获取更新结果，但未能实时更新通知栏
+* 服务新开线程
+* 通知优化
 * */
 public class MainActivity extends BaseActivity {
     private RecyclerView mRecyclerView;
@@ -56,9 +56,8 @@ public class MainActivity extends BaseActivity {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mRecyclerView.addItemDecoration(new DividerItemDecoration(this,
                 DividerItemDecoration.VERTICAL_LIST));
-        Collections.reverse(datasrc);
-        Collections.reverse(data);
-        mRecyclerView.setAdapter(madapter = new HomeAdapter(MainActivity.this, datasrc, data));
+        ShowInScreen showInScreen = new ShowInScreen(datasrc,data,madapter,mRecyclerView);
+        showInScreen.showInShun();
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -80,17 +79,21 @@ public class MainActivity extends BaseActivity {
         dbHelper = new MyDatabaseHelper(this,"Fanyi.db",null,1);
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         Cursor cursor = db.query("fanyi",null,null,null,null,null,null);
-        if (cursor.moveToFirst())
+        if (cursor.moveToLast())
         {
             do{
                 flag++;
                 String src = cursor.getString(cursor.getColumnIndex("src"));
                 String yi = cursor.getString(cursor.getColumnIndex("yiwen"));
+                String id = cursor.getString(cursor.getColumnIndex("id"));
                 datasrc.add(src);
                 data.add(yi);
                 if (flag>=10)
-                {break;}
-            }while(cursor.moveToNext());
+                {
+                    db.delete("fanyi","id<?",new String[]{id});//自动清理缓存数据
+                    break;
+                }
+            }while(cursor.moveToPrevious());
         }
         cursor.close();
     }
