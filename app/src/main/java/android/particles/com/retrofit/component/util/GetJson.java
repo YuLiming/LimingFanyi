@@ -43,29 +43,24 @@ import retrofit2.Response;
  */
 public class GetJson
 {
-    StringBuilder md5 = new StringBuilder();
-    String appid = APIValue.appid;
-    String salt = APIValue.salt;
-    String key = APIValue.key;
+    private static StringBuilder md5 = new StringBuilder();
+    private static String appid = APIValue.appid;
+    private static String salt = APIValue.salt;
+    private static String key = APIValue.key;
     private RecyclerView mRecyclerView;
     private List<String> fanyi;
     private List<String> src;
     protected HomeAdapter madapter;
-    private SQLiteDatabase db;
-    private Context context;
+    private static SQLiteDatabase db;
+    private static Context context;
 
-    public GetJson(List<String> from,List<String> datas,HomeAdapter adapter,RecyclerView recyclerView)
+    public GetJson(List<String> from,List<String> datas,RecyclerView recyclerView)
     {
         fanyi = datas;
-        madapter = adapter;
         mRecyclerView = recyclerView;
         src = from;
     }
-    public GetJson()
-    {
-        context = MyApplication.getContext();
-        Log.d("ylm","chushihua is work");
-    }
+
 
     public void getWord(final String word,String to)
     {
@@ -91,7 +86,7 @@ public class GetJson
                 Collections.reverse(fanyi);
                 fanyi.add(yi);
                 src.add(srcs);
-                ShowInScreen showInScreen = new ShowInScreen(src,fanyi,madapter,mRecyclerView);
+                ShowInScreen showInScreen = new ShowInScreen(src,fanyi,mRecyclerView);
                 showInScreen.showInFan();
             }
             @Override
@@ -102,8 +97,9 @@ public class GetJson
             }
         });
     }
-    public void showResultInNotication(String word,String to)
+    public static void showResultInNotication(String word,String to)
     {
+        context = MyApplication.getContext();
         md5.append(appid).append(word).append(salt).append(key);
         final String token = MD5.stringToMD5(md5.toString());
         ApiStores apiStores = AppClient.retrofit().create(ApiStores.class);
@@ -114,6 +110,14 @@ public class GetJson
                 List<TransResult> results = response.body().getTransResult();
                 String srcs = results.get(0).getSrc();
                 String yi = results.get(0).getDst();
+                //数据持久化
+                db = MyApplication.getDb();
+                ContentValues values = new ContentValues();
+                values.put("src", srcs);
+                values.put("yiwen", yi);
+                db.insert("fanyi", null, values);
+                values.clear();
+                //end
                 NotificationManager manager = (NotificationManager)context.getSystemService(Context.NOTIFICATION_SERVICE);
                 Notification.Builder builder = new Notification.Builder(context).setTicker("显示于屏幕顶端状态栏的文本")
                         .setSmallIcon(R.drawable.ic_launcher);

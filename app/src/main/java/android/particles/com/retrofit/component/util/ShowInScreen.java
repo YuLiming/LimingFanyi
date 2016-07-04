@@ -7,6 +7,8 @@ import android.support.v7.widget.RecyclerView;
 import java.util.Collections;
 import java.util.List;
 
+import retrofit2.http.GET;
+
 /**
  * Created by YLM on 2016/7/2.
  */
@@ -17,14 +19,13 @@ public class ShowInScreen
     private RecyclerView mRecyclerView;
     private HomeAdapter madapter;
 
-    public ShowInScreen(List<String> src,List<String> yi,HomeAdapter adapter,RecyclerView recyclerView)
+    public ShowInScreen(List<String> src,List<String> yi,RecyclerView recyclerView)
     {
         fansrc = src;
         fanyi = yi;
         mRecyclerView = recyclerView;
-        madapter = adapter;
-
     }
+
     public void showInFan()
     {
         Collections.reverse(fansrc);
@@ -35,4 +36,5 @@ public class ShowInScreen
     {
         mRecyclerView.setAdapter(madapter = new HomeAdapter(MyApplication.getContext(), fansrc, fanyi));
     }
+
 }

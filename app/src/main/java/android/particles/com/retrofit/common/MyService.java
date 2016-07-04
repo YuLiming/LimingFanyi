@@ -58,11 +58,10 @@ public class MyService extends Service
             public void onPrimaryClipChanged() {
                 GetCopyResult getCopyResult = new GetCopyResult();
                 src = getCopyResult.getResult();
-                GetJson getJson = new GetJson();
                 if (ToType.isLetter(src)) {
-                    getJson.showResultInNotication(src, "zh");
+                    GetJson.showResultInNotication(src, "zh");
                 } else {
-                    getJson.showResultInNotication(src, "en");
+                    GetJson.showResultInNotication(src, "en");
                 }
             }
         });
