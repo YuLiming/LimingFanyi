@@ -41,7 +41,7 @@ public class MyService extends Service
     {
         super.onCreate();
         builder = new Notification.Builder(this).setTicker("显示于屏幕顶端状态栏的文本")
-                .setSmallIcon(R.drawable.ic_launcher);
+                .setSmallIcon(R.mipmap.ic_launcher);
         Intent intent = new Intent(this,MainActivity.class);
         PendingIntent pi = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
         note = builder.setContentIntent(pi).setContentTitle("原文：暂无").setContentText("译文：暂无").build();

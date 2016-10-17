@@ -3,13 +3,13 @@
     package="android.particles.com.retrofit">
     <uses-permission android:name="android.permission.INTERNET" />
     <application
-        android:name=".common.MyApplication"
+        android:name=".base.BaseApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".modules.main.ui.MainActivity">
+        <activity android:name=".modules.search.SearchActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

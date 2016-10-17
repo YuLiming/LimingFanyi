@@ -3,7 +3,7 @@ package android.particles.com.retrofit.component.util;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
-import android.particles.com.retrofit.common.MyApplication;
+import android.particles.com.retrofit.base.BaseApplication;
 
 /**
  * Created by YLM on 2016/6/14.
@@ -25,7 +25,7 @@ public class GetCopyResult
     }
     public GetCopyResult()
     {
-        context = MyApplication.getContext();
+        context = BaseApplication.getContext();
         clipboardManager = (ClipboardManager)context.getSystemService(Context.CLIPBOARD_SERVICE);
     }
 

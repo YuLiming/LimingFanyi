@@ -3,7 +3,7 @@ package android.particles.com.retrofit.component.util;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.particles.com.retrofit.common.MyApplication;
+import android.particles.com.retrofit.base.BaseApplication;
 
 import java.util.List;
 
@@ -18,7 +18,7 @@ public class InitData
     public static void init(List<String> datasrc,List<String> data)
     {
         flag = 0;
-        context = MyApplication.getContext();
+        context = BaseApplication.getContext();
         dbHelper = new MyDatabaseHelper(context,"Fanyi.db",null,1);
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         Cursor cursor = db.query("fanyi",null,null,null,null,null,null);

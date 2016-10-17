@@ -1,32 +1,21 @@
 package android.particles.com.retrofit.modules.main.ui;
 
-import android.app.AlertDialog;
-import android.content.ContentValues;
 import android.content.Intent;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.particles.com.retrofit.*;
 import android.particles.com.retrofit.base.BaseActivity;
-import android.particles.com.retrofit.common.MyApplication;
 import android.particles.com.retrofit.common.MyService;
 import android.particles.com.retrofit.component.util.DividerItemDecoration;
 import android.particles.com.retrofit.component.util.GetJson;
 import android.os.Bundle;
 import android.particles.com.retrofit.component.util.InitData;
-import android.particles.com.retrofit.component.util.MyDatabaseHelper;
 import android.particles.com.retrofit.component.util.ShowInScreen;
 import android.particles.com.retrofit.component.util.ToType;
-import android.particles.com.retrofit.modules.main.adapter.HomeAdapter;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
-import java.util.Collections;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 /*待完成功能：
