@@ -1,9 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <TextView
-        android:text="history"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-</LinearLayout>
+    android:fitsSystemWindows="true"
+    android:layout_height="match_parent"
+    >
+        <android.support.v4.widget.SwipeRefreshLayout
+            android:id="@+id/refresh_histroy"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/history_rv"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                </android.support.v7.widget.RecyclerView>
+
+        </android.support.v4.widget.SwipeRefreshLayout>
+
+
+
+
+
+
+</FrameLayout>

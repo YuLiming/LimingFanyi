@@ -3,6 +3,7 @@ package android.particles.com.retrofit.base;
 import android.app.Application;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
+import android.particles.com.retrofit.common.RetrofitSingleton;
 import android.particles.com.retrofit.component.util.MyDatabaseHelper;
 
 /**
@@ -17,8 +18,9 @@ public class BaseApplication extends Application {
     {
         super.onCreate();
         context = getApplicationContext();
-        dbHelper = new MyDatabaseHelper(this,"Fanyi.db",null,1);
+        dbHelper = new MyDatabaseHelper(this,"Traslation.db",null,1);
         db = dbHelper.getWritableDatabase();
+        RetrofitSingleton.getInstance();
     }
     public static Context getContext()
     {

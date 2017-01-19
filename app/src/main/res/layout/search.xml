@@ -1,17 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <FrameLayout
-        android:id="@+id/fragment"
+    <ImageView
+        android:id="@+id/bg"
+        android:scaleType="centerCrop"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+    <RelativeLayout
+        android:fitsSystemWindows="true"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+        <FrameLayout
+            android:id="@+id/fragment"
+            android:layout_marginBottom="50dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-    </FrameLayout>
-    <android.particles.com.retrofit.component.widget.TabView.TabContainer
-        android:id="@+id/tablayout"
-        android:background="@android:color/black"
-        android:layout_alignParentBottom="true"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"/>
-</RelativeLayout>
+        </FrameLayout>
+        <android.particles.com.retrofit.component.widget.TabView.TabContainer
+            android:id="@+id/tablayout"
+            android:background="#eee"
+            android:layout_alignParentBottom="true"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"/>
+
+    </RelativeLayout>
+
+</FrameLayout>

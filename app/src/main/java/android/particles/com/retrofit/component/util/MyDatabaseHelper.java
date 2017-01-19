@@ -10,10 +10,12 @@ import android.database.sqlite.SQLiteOpenHelper;
  */
 public class MyDatabaseHelper extends SQLiteOpenHelper
 {
-    public static final String CREATE_DATA = "create table fanyi("
+    public static final String CREATE_DATA = "create table translate("
             +"id integer primary key autoincrement,"
-            +"src text,"
-            +"yiwen text)";
+            +"query text,"
+            +"translation text,"
+            +"basic text,"
+            +"phonetic text)";
 
     private Context mcontext;
 

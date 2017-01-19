@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <merge xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="#8000"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     <ImageView
+        android:layout_marginTop="3dp"
         android:id="@+id/tab_item_image"
-        android:layout_height="30dp"
-        android:layout_width="30dp"/>
+        android:layout_height="25dp"
+        android:layout_width="25dp"/>
     <TextView
         android:id="@+id/tab_item_text"
         android:textColor="@android:color/white"

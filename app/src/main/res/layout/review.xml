@@ -1,10 +1,121 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <TextView
-        android:text="Review"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+    android:layout_height="match_parent"
+    android:background="#fff"
+    android:fitsSystemWindows="true"
+    >
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:background="@android:color/black"
+        android:fitsSystemWindows="true"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        >
+        <TextView
+            android:layout_centerInParent="true"
+            android:layout_gravity="center"
+            android:textColor="#bbb"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="设置"/>
+    </android.support.v7.widget.Toolbar>
 
-</LinearLayout>
+    <LinearLayout
+        android:layout_marginTop="50dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingRight="20dp"
+        android:paddingLeft="20dp">
+        <RelativeLayout
+            android:id="@+id/setting_clean"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:gravity="center_vertical"
+            android:layout_height="65dp">
+            <TextView
+                android:text="清除缓存"
+                android:textColor="#222"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <ImageView
+                android:layout_alignParentRight="true"
+                android:src="@drawable/enter"
+                android:layout_width="15dp"
+                android:layout_height="15dp" />
+        </RelativeLayout>
+        <View
+            android:background="#ddc"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"/>
+        <RelativeLayout
+            android:id="@+id/setting_close"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:gravity="center_vertical"
+            android:layout_height="65dp">
+            <TextView
+                android:text="关闭全屏搜词"
+                android:textColor="#222"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <ImageView
+                android:layout_alignParentRight="true"
+                android:src="@drawable/enter"
+                android:layout_width="15dp"
+                android:layout_height="15dp" />
+        </RelativeLayout>
+        <View
+            android:background="#ddc"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"/>
+        <RelativeLayout
+            android:id="@+id/setting_connection"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:gravity="center_vertical"
+            android:layout_height="65dp">
+            <TextView
+                android:text="联系作者"
+                android:textColor="#222"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <ImageView
+                android:layout_alignParentRight="true"
+                android:src="@drawable/enter"
+                android:layout_width="15dp"
+                android:layout_height="15dp" />
+        </RelativeLayout>
+        <View
+            android:background="#ddc"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"/>
+        <RelativeLayout
+            android:id="@+id/setting_finish"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:gravity="center_vertical"
+            android:layout_height="65dp">
+            <TextView
+                android:text="退出"
+                android:textColor="#222"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <ImageView
+                android:layout_alignParentRight="true"
+                android:src="@drawable/enter"
+                android:layout_width="15dp"
+                android:layout_height="15dp" />
+        </RelativeLayout>
+        <View
+            android:background="#ddc"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"/>
+
+
+
+    </LinearLayout>
+
+
+</FrameLayout>

@@ -20,7 +20,12 @@ public class GetCopyResult
         String temp;
         ClipData abc = clipboardManager.getPrimaryClip();
         ClipData.Item item = abc.getItemAt(0);
-        temp = item.getText().toString();
+        if (item.getText()!=null){
+            temp = item.getText().toString();
+        }else {
+            temp = "";
+        }
+
         return temp;
     }
     public GetCopyResult()

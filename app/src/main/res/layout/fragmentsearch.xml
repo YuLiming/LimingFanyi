@@ -1,49 +1,141 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    >
 
-    <android.support.v4.widget.DrawerLayout
-        android:id="@+id/drawerlayout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
         <LinearLayout
-            android:id="@+id/content"
+            android:fitsSystemWindows="true"
+            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-            <android.support.v7.widget.Toolbar
-                android:background="@android:color/black"
-                android:id="@+id/search_toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                app:contentInsetLeft="10dp">
+            <LinearLayout
 
-            </android.support.v7.widget.Toolbar>
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/navigationview"
-            android:layout_gravity="start"
-            android:orientation="vertical"
-            android:layout_width="240dp"
-            android:layout_height="match_parent"
-            android:background="@android:color/white">
-            <ImageView
-                android:background="@drawable/background"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-            <TextView
-                android:text="侧滑栏"
+                android:layout_marginTop="50dp"
                 android:layout_gravity="center"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:gravity="center"
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:background="#8000"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <EditText
+                        android:id="@+id/search_editText"
+                        android:layout_width="230dp"
+                        android:layout_height="50dp"
+                        android:paddingStart="10dp"
+                        android:maxLines="1"
+                        android:textSize="18dp"
+                        android:background="@null"
+                        android:textColor="#bfbfbf"
+                        android:textColorHint="#bfbfbf"
+                        android:hint="                  输入翻译内容"/>
+                    <ImageView
+                        android:layout_marginTop="5dp"
+                        android:layout_marginBottom="5dp"
+                        android:src="@drawable/index_xiexian"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp" />
+                    <Button
+                        android:id="@+id/search_button"
+                        android:layout_marginBottom="8dp"
+                        android:layout_marginEnd="5dp"
+                        android:layout_width="40dp"
+                        android:layout_height="44dp"
+                        android:background="@drawable/index_button"
+                        />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_marginTop="50dp"
+                android:background="#8000"
+                android:layout_gravity="center"
+                android:orientation="vertical"
+                android:layout_width="310dp"
+                android:layout_height="360dp"
+                android:padding="10dp">
+                <LinearLayout
+                    android:id="@+id/shiyi"
+                    android:orientation="vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="#fff"
+                        android:text="释文："/>
+                    <TextView
+                        android:textColor="#fff"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/search_result" />
+
+                </LinearLayout>
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:textColor="#fff"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="更多释义："/>
+                    <TextView
+                        android:textColor="#fff"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/search_n" />
+
+                </LinearLayout>
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:textColor="#fff"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="音标："/>
+                    <TextView
+                        android:textColor="#fff"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/search_phonetic" />
+
+                </LinearLayout>
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:textColor="#fff"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="网络释义："/>
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/search_web"
+                        android:layout_width="290dp"
+                        android:layout_height="wrap_content">
+
+                    </android.support.v7.widget.RecyclerView>
+
+
+                </LinearLayout>
+
+
+            </LinearLayout>
 
         </LinearLayout>
 
 
-    </android.support.v4.widget.DrawerLayout>
 
-</LinearLayout>
+
+
+</FrameLayout>
 
